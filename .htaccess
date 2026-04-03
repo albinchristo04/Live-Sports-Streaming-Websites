@@ -1,0 +1,52 @@
+Options -Indexes
+RewriteEngine On
+
+# Serve existing files/dirs directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Pretty URLs for match pages
+RewriteRule ^match/([a-z0-9\-]+)/?$ match.php?slug=$1 [L,QSA]
+
+# Admin routes
+RewriteRule ^admin/?$ admin/index.php [L]
+RewriteRule ^admin/dashboard/?$ admin/dashboard.php [L]
+RewriteRule ^admin/import/?$ admin/import.php [L]
+RewriteRule ^admin/import/fetch/?$ admin/import-fetch.php [L]
+RewriteRule ^admin/import/store/?$ admin/import-store.php [L]
+RewriteRule ^admin/matches/?$ admin/matches.php [L]
+RewriteRule ^admin/matches/create/?$ admin/match-create.php [L]
+RewriteRule ^admin/matches/([0-9]+)/edit/?$ admin/match-edit.php?id=$1 [L,QSA]
+RewriteRule ^admin/matches/([0-9]+)/delete/?$ admin/match-delete.php?id=$1 [L,QSA]
+RewriteRule ^admin/matches/([0-9]+)/restore/?$ admin/match-restore.php?id=$1 [L,QSA]
+RewriteRule ^admin/analytics/?$ admin/analytics.php [L]
+RewriteRule ^admin/login/?$ admin/login.php [L]
+RewriteRule ^admin/logout/?$ admin/logout.php [L]
+
+# API
+RewriteRule ^api/track-view/?$ api/track-view.php [L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# PHP settings (if allowed)
+<IfModule mod_php.c>
+    php_value session.cookie_httponly 1
+    php_value session.cookie_samesite Lax
+    php_flag display_errors Off
+</IfModule>
+
+# Protect sensitive files
+<FilesMatch "\.(sql|log|env|json|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow JSON files needed for importers (accessed server-side only, not via web)
+# The importer fetches from GitHub URLs, not local files — so this is fine.

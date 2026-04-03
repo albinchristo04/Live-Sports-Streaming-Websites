@@ -1,0 +1,10 @@
+#Note: Please remove semicolon (;) from your file editor's list of delimiter or separator characters.
+#Id,Parent Id,Code,Name,Sizes,Description,Placements,Target Window,Labels
+23341935627,23249651246,homepage_footer_banner,homepage_footer_banner,300x250; 320x50; 728x90,,,_blank,
+23342996723,23249651246,homepage_header_banner,homepage_header_banner,320x50; 320x100; 728x90; 970x90,,,_blank,
+23341935360,23249651246,homepage_infeed_banner,homepage_infeed_banner,300x250; 320x100; 336x280,,,_blank,
+23341936095,23249651246,match_above_player_banner,match_above_player_banner,320x50; 728x90; 970x90,,,_blank,
+23341936323,23249651246,match_below_player_banner,match_below_player_banner,300x250; 336x280; 728x90,,,_blank,
+23341930107,23249651246,match_footer_banner,match_footer_banner,300x250; 320x50; 728x90,,,_blank,
+23342575903,23249651246,match_header_banner,match_header_banner,320x50; 320x100; 728x90,,,_blank,
+23342576122,23249651246,match_sidebar_banner,match_sidebar_banner,160x600; 300x250; 300x600,,,_blank,
